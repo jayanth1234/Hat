@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="angularApp">
+    <head>
+        <title>Fyle</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+
+        <!-- load bootstrap and fontawesome via CDN -->
+<!--        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" crossorigin="anonymous">
+    
+        <!-- load angular via CDN -->
+        <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body>
+
+
+        <div class="header">
+            Bank Branches
+        </div>
+        <br><br>
+
+        <div class="container">
+			<div ng-controller="mainController">
+                
+                <div class="row">
+                        <div class="col-lg-4 col-sm-4">
+                            <select ng-model="city" ng-change="changedValue(city)"
+                                data-ng-options="city for city in cities">
+                                <option value="">Select City</option>
+                            </select>
+                        </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <input type="text" ng-model='searchCity' placeholder="Search your branch here.." />
+                    </div>
+                </div>
+                
+                <br><br>
+
+                <div style="overflow-x:auto;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>IFSC CODE</th>
+                            <th>Bank Name</th>
+                            <th>Branch</th>
+                            <th>City</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="bankName">
+                        <tr ng-repeat="city in bankName | filter:searchCity">
+                            <td>{{city.ifsc}}</td>
+                            <td>{{city.bank_name}}</td>
+                            <td>{{city.branch}}</td>
+                            <td>{{city.city}}</td>
+                            <td>{{city.address}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered">
+                    <tbody ng-if="!bankName">
+                        <tr>
+                            <td style="text-align: center; font-size: 24px;">
+                                Please select your city !!!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            </div>
+
+		</div>
+
+    </body>
+</html>
